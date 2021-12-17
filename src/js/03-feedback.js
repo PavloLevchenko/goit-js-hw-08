@@ -24,7 +24,7 @@ function saveForm(elements) {
       fields[element.name] = element.value;
     }
   });
-  console.log(111);
+
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fields));
 }
 
