@@ -5,14 +5,16 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { galleryItems } from './gallery-items';
 // Change code below this line
 
-let insertHTML = '';
-for (const image of galleryItems) {
-  insertHTML += `<div class="gallery__item">
+const insertHTML = galleryItems.reduce((divs, image) => {
+  return (
+    divs +
+    `<div class="gallery__item">
 			<a href="${image.original}" class="gallery__link">
 				<image class="gallery__image" src="${image.preview}" alt="${image.description}">
 			</a>
-		</div>`;
-}
+		</div>`
+  );
+}, '');
 
 const gallery = document.querySelector('.gallery');
 gallery.insertAdjacentHTML('beforeend', `${insertHTML}`);
