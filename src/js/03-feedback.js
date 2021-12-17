@@ -1,6 +1,8 @@
 import throttle from 'lodash/throttle';
 
 const LOCALSTORAGE_KEY = 'feedback-form-state';
+const THROTLE_DELAY = 500;
+
 const form = document.querySelector('.feedback-form');
 
 function fillForm(fields) {
@@ -28,7 +30,7 @@ function saveForm(elements) {
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fields));
 }
 
-const throttled = throttle(saveForm, 500);
+const throttled = throttle(saveForm, THROTLE_DELAY);
 
 function checkForm(event) {
   throttled(event.currentTarget.elements);
