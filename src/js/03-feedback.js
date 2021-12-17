@@ -18,17 +18,23 @@ if (fields != null) {
   fields = {};
 }
 
-function checkForm(event) {
-  Array.prototype.forEach.call(event.currentTarget.elements, element => {
+function saveForm(elements) {
+  Array.prototype.forEach.call(elements, element => {
     if (element.type != 'submit') {
       fields[element.name] = element.value;
     }
   });
+  console.log(111);
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(fields));
 }
 
-const throttled = throttle(checkForm, 500, { leading: true, trailing: false });
-form.addEventListener('input', throttled);
+const throttled = throttle(saveForm, 500);
+
+function checkForm(event) {
+  throttled(event.currentTarget.elements);
+}
+
+form.addEventListener('input', checkForm);
 
 function handleSubmit(event) {
   event.preventDefault();
