@@ -4,7 +4,7 @@ const LOCALSTORAGE_KEY = 'feedback-form-state';
 const form = document.querySelector('.feedback-form');
 
 function fillForm(fields) {
-  form.elements.foreach(element => {
+  Array.prototype.forEach.call(form.elements, element => {
     if (element.type != 'submit' && fields[element.name] != '') {
       element.value = fields[element.name];
     }
@@ -17,9 +17,9 @@ if (fields != null) {
 } else {
   fields = {};
 }
-console.log(fields);
+
 function checkForm(event) {
-  event.currentTarget.elements.foreach(element => {
+  Array.prototype.forEach.call(event.currentTarget.elements, element => {
     if (element.type != 'submit') {
       fields[element.name] = element.value;
     }
@@ -33,6 +33,7 @@ form.addEventListener('input', throttled);
 function handleSubmit(event) {
   event.preventDefault();
   event.currentTarget.reset();
+  localStorage.clear();
   console.log(fields);
 }
 
